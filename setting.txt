@@ -1,0 +1,12 @@
+/*
+작성 파일 개요 : 한성 SDS 프로젝트 실행 방법
+작성일자 : 0518
+작성자 : 이찬우
+*/
+
+# 설정
+# 1. server
+
+prj-name 이동
+npm install
+npm start
