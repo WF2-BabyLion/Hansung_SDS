@@ -126,4 +126,15 @@ input[type='text'], input[type='email'], input[type='password'], textarea {
 #search-form { text-align: right; }
 #join-form { padding: 10px; text-align: center; }
 #hashtag-form { text-align: right; }
+.tumbsBox{
+  margin-left:90%;
+}
+.tumbsIcon{
+  margin-left:20px;
+  cursor:pointer;
+  align-items: left;
+  margin-top:10px;
+  width:20px;
+  height:20px;
+}
 footer { text-align: center; }
