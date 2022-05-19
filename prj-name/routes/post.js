@@ -33,6 +33,23 @@ router.post('/img', isLoggedIn, upload.single('img'), (req, res) => {
   res.json({ url: `/img/${req.file.filename}` });
 });
 
+//삭제
+router.post('/:id/delete', isLoggedIn, async (req, res, next) => {
+  try {
+    const postId = req.params.id;
+    await Post.destroy({
+      where: { id: postId },
+    });
+    res.send('글 삭제 완료');
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+//수정
+/* */
+
 const upload2 = multer();
 router.post('/', isLoggedIn, upload2.none(), async (req, res, next) => {
   try {
@@ -45,13 +62,13 @@ router.post('/', isLoggedIn, upload2.none(), async (req, res, next) => {
     const hashtags = req.body.content.match(/#[^\s#]*/g);
     if (hashtags) {
       const result = await Promise.all(
-        hashtags.map(tag => {
+        hashtags.map((tag) => {
           return Hashtag.findOrCreate({
             where: { title: tag.slice(1).toLowerCase() },
-          })
-        }),
+          });
+        })
       );
-      await post.addHashtags(result.map(r => r[0]));
+      await post.addHashtags(result.map((r) => r[0]));
     }
     res.redirect('/');
   } catch (error) {

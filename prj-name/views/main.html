@@ -48,6 +48,13 @@
               <div class="twit-img"><img src="{{twit.img}}" alt="섬네일"></div>
               
             {% endif %}
+            
+            <!--유저 체크-->
+            {% if twit.User.id == user.id %} 
+              <button class="twit-delete btn">게시글 삭제</button>
+              <!--<button class="twit-edit btn">게시글 수정</button> -->
+            {% endif %}
+            <!-- 삭제 if -->
           </div>
           
         {% endfor %}
@@ -140,5 +147,21 @@
         }
       });
     });
+
+    //삭제 쿼리
+    document.querySelectorAll('.twit-delete').forEach(function(tag){
+      console.log(tag);
+      tag.addEventListener('click', function(){
+        const twitId = document.querySelector('.twit-id').value;
+        axios.post(`/post/${twitId}/delete`)
+          .then((res) => {
+            location.reload();
+          })
+          .catch((err) => {
+            console.error(err);
+          })
+      });
+    });
+
   </script>
 {% endblock %}
