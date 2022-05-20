@@ -9,6 +9,12 @@
           
   </head>
   <body>
+    <header>
+      <div class="header">
+        <img class="logo" src="/img/hansungsds_logo.png" alt="로고"/>
+        <di class="header-name"v>Hansugn SDS</div>
+    </div>
+    </header>
     <div class="container">
       <div class="profile-wrap">
         <div class="profile">
@@ -24,15 +30,15 @@
             </div>
           <input id="my-id" type="hidden" value="{{user.id}}">
           <a id="my-profile" href="/profile" class="btn">내 프로필</a>
-          <a id="logout" href="/auth/logout" class="btn">로그아웃</a>
-  
+          <a id="logout" href="/auth/logout" class="logoutBtn">로그아웃</a>
+          
         <!-- * 로그인 했을 때만 나와야하므로 해당 영역에 선언
              * 임시 제작 버튼 추가
         -->
         <br><br>
         <a id="generate" href="/create" class="genereteBtn">문서 만들기</a>
         {% else %}
-          <form id="login-form" action="/auth/login" method="post">
+          <form id="loginForm" action="/auth/login" method="post">
             <div class="input-group">
               <label for="email">이메일</label>
               <input id="email" type="email" name="email" required autofocus>
@@ -42,8 +48,9 @@
               <input id="password" type="password" name="password" required>
             </div>
             <a id="join" href="/join" class="btn">회원가입</a>
-            <button id="login" type="submit" class="btn">로그인</button>
+            <button id="loginBtn" type="submit" class="btn">로그인</button>
             <a id="kakao" href="/auth/kakao" class="btn">카카오톡</a>
+           
           </form>
         {% endif %}
         </div>
@@ -64,5 +71,6 @@
     </script>
     {% block script %}
     {% endblock %}
+
   </body>
 </html>
