@@ -1,11 +1,57 @@
 * { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; height: 100%; }
+html, body {  padding: 0; 
+}
 .btn {
   display: inline-block;
-  padding: 0 5px;
+  padding: 10 5px;
   text-decoration: none;
   cursor: pointer;
   border-radius: 4px;
+  width:80px;
+  font-size: 15px;
+  font-weight:600;
+  text-align: center;
+  background: white;
+  color:crimson;
+  border: 1px solid silver;
+  height: 37px;
+  line-height: 37px;
+  vertical-align: top;
+}
+footer{
+  margin-top:10%;
+}
+.logoutBtn{
+  display: inline-block;
+  padding: 10 5px;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 4px;
+  width:80px;
+  font-size: 15px;
+  font-weight:600;
+  text-align: center;
+  background: white;
+  color:crimson;
+  border: 1px solid silver;
+  height: 37px;
+  line-height: 37px;
+  vertical-align: top;
+  margin-left:80px;
+}
+header{
+  margin-top: 20px;
+  margin-bottom:50px;
+}
+.uploadBtn{
+  display: inline-block;
+  padding: 10 5px;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 4px;
+  width:80px;
+  margin-right: 10px;
+  margin-left:10px;
   background: white;
   border: 1px solid silver;
   color: crimson;
@@ -14,7 +60,17 @@ html, body { margin: 0; padding: 0; height: 100%; }
   vertical-align: top;
   font-size: 12px;
 }
-
+.logo{
+  width:300px;
+  height:80px;
+}
+#loginForm{
+  background-color: #BACDE9;
+}
+#loginBtn{
+  background-color: skyblue;
+  color:gray;
+}
 /* 문서 생성 버튼 */
 .genereteBtn {
   font-family: 'nanumgothic', sans-serif;
@@ -23,6 +79,7 @@ html, body { margin: 0; padding: 0; height: 100%; }
   display: inline-block;
   padding: 0 5px;
   text-decoration: none;
+  font-weight: 600;
   cursor: pointer;
   border-radius: 4px;
   background: white;
@@ -41,9 +98,9 @@ input[type='text'], input[type='email'], input[type='password'], textarea {
   padding: 10px;
   border: 1px solid silver;
 }
-.container { width: 100%; height: 100%; }
+.container { width: 100%; height: 100vh; display:flex;}
 @media screen and (min-width: 800px) {
-  .container { width: 800px; margin: 0 auto; }
+  .container { width: 100%; }
 }
 .input-group { margin-bottom: 15px; }
 .input-group label { width: 25%; display: inline-block; }
@@ -51,10 +108,10 @@ input[type='text'], input[type='email'], input[type='password'], textarea {
 .half { float: left; width: 50%; margin: 10px 0; }
 #join { float: right; }
 .profile-wrap {
-  width: 100%;
+  margin-left:25%;
+  margin-right:5%;
+  height:280px;
   display: inline-block;
-  vertical-align: top;
-  margin: 10px 0;
 }
 @media screen and (min-width: 800px) {
   .profile-wrap { width: 290px; margin-bottom: 0; }
@@ -62,36 +119,36 @@ input[type='text'], input[type='email'], input[type='password'], textarea {
 .profile {
   text-align: left;
   padding: 10px;
-  margin-right: 10px;
   border-radius: 4px;
   border: 1px solid silver;
-  background: lightcoral;
+  background: #BACDE9;
 }
 .user-name { font-weight: bold; font-size: 18px; }
 .count { font-weight: bold; color: crimson; font-size: 18px; }
 .timeline {
   margin-top: 10px;
-  width: 100%;
+  width:500px;
   display: inline-block;
   border-radius: 4px;
   vertical-align: top;
 }
-@media screen and (min-width: 800px) { .timeline { width: 500px; } }
 #twit-form {
   border-bottom: 1px solid silver;
   padding: 10px;
-  background: lightcoral;
+  background: #BACDE9;
+  color:lightcoral;
   overflow: hidden;
 }
 #img-preview { max-width: 100%; }
 #img-label {
   float: left;
   cursor: pointer;
-  border-radius: 4px;
-  border: 1px solid crimson;
+  background-color: white;
+  border-radius: 5px;
   padding: 0 10px;
-  color: white;
-  font-size: 12px;
+  color: crimson;
+  font-weight: 600;
+  font-size: 13px;
   height: 37px;
   line-height: 37px;
 }
@@ -99,9 +156,26 @@ input[type='text'], input[type='email'], input[type='password'], textarea {
 #twit { width: 100%; min-height: 72px; }
 #twit-btn {
   float: right;
-  color: white;
-  background: crimson;
+  cursor:pointer;
+  width:80px;
+  color: crimson;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 13px;
+  background: whtie;
   border: none;
+}
+.header{
+  display:flex;
+}
+.header-name{
+  font-size:40px;
+  font-weight:500;
+  margin-top:30px;
+  color:gray;
+  font-family: Georgia, serif;
+  margin-left:35%;
+  text-align: center;
 }
 .twit {
   border: 1px solid silver;
@@ -125,7 +199,11 @@ input[type='text'], input[type='email'], input[type='password'], textarea {
 .error-message { color: red; font-weight: bold; }
 #search-form { text-align: right; }
 #join-form { padding: 10px; text-align: center; }
-#hashtag-form { text-align: right; }
+#hashtag-form { 
+  text-align: right;
+  margin-top:10px; 
+  margin-bottom:10px;
+}
 .tumbsBox{
   margin-left:90%;
 }
