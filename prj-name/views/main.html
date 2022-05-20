@@ -33,8 +33,13 @@
             <div class="twit-author">{{twit.User.nick}}</div>
             {% if not followerIdList.includes(twit.User.id) and twit.User.id !== user.id %}
             <button class="twit-follow">팔로우하기</button>
-                
             {% endif %}
+
+            <!--친구 끊기-->
+            {% if followerIdList.includes(twit.User.id) and twit.User.id !== user.id %}
+            <button class="twit-unfollow">친구 끊기</button>
+            {% endif %}
+
             {% if user%}
             <img class="tumbsIcon" src="/img/thumbs_up_icon.png" alt="따봉 아이콘"/>
             {% endif %}
@@ -53,6 +58,7 @@
             {% if twit.User.id == user.id %} 
               <button class="twit-delete btn">삭제</button>
               <!--<button class="twit-edit btn">게시글 수정</button> -->
+          
             {% endif %}
             <!-- 삭제 if -->
           </div>
@@ -162,6 +168,27 @@
             console.error(err);
           })
       });
+    });
+
+    //팔로잉 취소 쿼리
+    document.querySelectorAll('.twit-unfollow').forEach(function (tag) {
+        tag.addEventListener('click', function () {
+            const myId = document.querySelector('#my-id');
+            if (myId) {
+                const userId = tag.parentNode.querySelector('.twit-user-id').value;
+                if (userId !== myId.value) {
+                    if (confirm('친구를 삭제하시겠습니까?')) {
+                        axios.post(`/user/${userId}/unfollow`)
+                            .then(() => {
+                                location.reload();
+                            })
+                            .catch((err) => {
+                                console.error(err);
+                            });
+                    }
+                }
+            }
+        });
     });
 
   </script>

@@ -190,10 +190,22 @@ input[type='text'], input[type='email'], input[type='password'], textarea {
   background: #fff;
   border: 1px solid silver;
   border-radius: 5px;
+  color: #002870;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/*언팔로우*/
+.twit-unfollow {
+  padding: 1px 5px;
+  background: #fff;
+  border: 1px solid silver;
+  border-radius: 5px;
   color: crimson;
   font-size: 12px;
   cursor: pointer;
 }
+
 .twit-img { text-align: center; }
 .twit-img img { max-width: 75%; }
 .error-message { color: red; font-weight: bold; }
@@ -261,4 +273,22 @@ footer { text-align: center; }
   line-height: 37px;
   vertical-align: top;
   font-size: 12px;
+}
+
+/*팔로잉 취소 버튼*/
+.followDel {
+  display: inline-block;
+  padding: 10 5px;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 15px;
+  width:60px;
+  margin-right: 30px;
+  background: white;
+  border: 1px solid silver;
+  color: crimson;
+  height: 27px;
+  line-height: 27px;
+  vertical-align: top;
+  font-size: 8px;
 }

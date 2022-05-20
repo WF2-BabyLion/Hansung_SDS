@@ -13,7 +13,9 @@
       <h2>팔로잉 목록</h2>
       {% if user.Followings %}
         {% for following in user.Followings %}
-          <div>{{following.nick}}</div>
+          <div>{{following.nick}}
+          </div>
+          <br>
         {% endfor %}
       {% endif %}
     </div>
