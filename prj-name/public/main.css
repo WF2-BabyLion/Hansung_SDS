@@ -61,8 +61,9 @@ header{
   font-size: 12px;
 }
 .logo{
-  width:300px;
-  height:80px;
+  width: 384px;
+  height: auto;
+  margin-left: 50px;
 }
 #loginForm{
   background-color: #BACDE9;
@@ -169,12 +170,11 @@ input[type='text'], input[type='email'], input[type='password'], textarea {
   display:flex;
 }
 .header-name{
-  font-size:40px;
+  font-size:72px;
   font-weight:500;
   margin-top:30px;
   color:gray;
   font-family: Georgia, serif;
-  margin-left:35%;
   text-align: center;
 }
 .twit {
@@ -216,3 +216,11 @@ input[type='text'], input[type='email'], input[type='password'], textarea {
   height:20px;
 }
 footer { text-align: center; }
+
+
+/* hr 라인 스타일 */
+.lineStyle {
+  background: #002870;
+  border: 0;
+  height: 3px;
+}
