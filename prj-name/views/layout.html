@@ -34,12 +34,12 @@
           <input id="my-id" type="hidden" value="{{user.id}}">
           <a id="my-profile" href="/profile" class="btn">내 프로필</a>
           <a id="logout" href="/auth/logout" class="logoutBtn">로그아웃</a>
-          
         <!-- * 로그인 했을 때만 나와야하므로 해당 영역에 선언
              * 임시 제작 버튼 추가
         -->
         <br><br>
         <a id="generate" href="/create" class="genereteBtn">문서 만들기</a>
+      
         {% else %}
           <form id="loginForm" action="/auth/login" method="post">
             <div class="input-group">
@@ -53,7 +53,6 @@
             <a id="join" href="/join" class="btn">회원가입</a>
             <button id="loginBtn" type="submit" class="btn">로그인</button>
             <a id="kakao" href="/auth/kakao" class="btn">카카오톡</a>
-           
           </form>
         {% endif %}
         </div>
@@ -71,6 +70,24 @@
           alert(new URL(location.href).searchParams.get('loginError'));
         }
       };
+
+      
+    //닉네임 변경 쿼리
+    document.querySelector('.modifyBtn').addEventListener('click', ()=>{
+      const input = document.querySelector('.modifyNickname');
+      const value = input.value;
+      input.value = '';
+
+      axios.post('/user/change',{
+        name:value
+      })
+      .then((response)=>{
+      location.reload(); 
+    })
+      .catch((err) => {
+        console.error(err);
+      });
+    });
     </script>
     {% block script %}
     {% endblock %}

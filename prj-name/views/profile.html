@@ -2,6 +2,13 @@
 
 {% block content %}
   <div class="timeline">
+    <div>
+      <h2>닉네임 변경</h2>
+      <input type="text" class="modifyNickname"/>
+      <button class="modifyBtn Nickname">변경</button>
+    </div>
+    <br>
+    <hr class="lineStyle">
     <div class="followings half">
       <h2>팔로잉 목록</h2>
       {% if user.Followings %}
