@@ -11,6 +11,7 @@ router.use((req, res, next) => {
   res.locals.followerIdList = req.user
     ? req.user.Followings.map((f) => f.id)
     : [];
+  //req.user의 데이터들이 아래의 모든 라우터에 적용 됨.
   next();
 });
 
