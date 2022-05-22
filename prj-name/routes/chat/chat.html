@@ -7,42 +7,40 @@
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <!-- 부트스트랩을 사용하기 위한 link와 script-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"> </script>
     <style>
-        #container {
-            width: 100%;
-            height: 350px;
-            border: 2px solid black;
-            background: whitesmoke;
-        }
-        #chatView {
-            height: 100%;
-            overflow-y: scroll;
-        }
-        #chatForm {
-            height: 10%;
-            border-top: 1px solid black;
-            text-align: center;
-        }
-        #msg {
-            width: 76%;
-            height: 32px;
-            border-radius: 8px;
-
-        }
-        #send {
-            width: 20%;
-            height: 40px;
-            border-radius: 50px;
-            background: black;
-            color: white;
-        }
-
-        a { text-decoration:none } 
-
-        header{
-  margin-top: 20px;
-  margin-bottom:50px;
+    #top{ /*최상단 프로젝트 이름*/
+  width: 100%;
+  color: white;
+  background-color: #002870;
+  height: 35px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 20px;
+  line-height : 35px;
+}
+#chatLog{ /*채팅 기록*/
+  width: 100%;
+}
+#chat{ /*이름, 메시지, 전송버튼*/
+  display: flex;
+}
+#name{
+  width: 20%;
+}
+#message{
+  width: 60%;
+}
+#submit{
+  width: 20%;
+  background-color: #BACDE9;
+  color: rgb(80, 80, 80);
+  font-weight: 800;
+  border: none;
+  outline: none;
+  border-radius: 5px;
 }
 
 /* hr 라인 스타일 */
@@ -74,19 +72,23 @@
       </div>
       <hr class="lineStyle">
       </header>
-    <div style="text-align: left;">
-        <a href="javascript:history.back();"style="color: #933838"><h5>뒤로</h5></a>
-    </div>
-    <div id="container">
-        <div id="chatView">
-        </div>
-        <form id="chatForm" onsubmit="return false">
-            <hr>
-            <input type="text" id="msg">
-            <input type="submit" id="send" value="전송">
-            <hr>
-        </form>
-    </div>
+        <a href="javascript:history.back();" style="text-decoration-line : none;"><h6 style="font-family: 고딕; color: rgb(202, 74, 74);">&nbsp;뒤로가기</h6></a>
+ <!-- top-->
+ <div id="top"> 
+   한성 SDS 멀티채팅
+  </div>
+  <!-- textarea-->
+  <div>
+    <textarea class="form-control" id="chatLog" readonly="" rows="15"> </textarea>
+  </div>
+  <!-- name, text, submit-->
+  <div>
+    <form id="chat">
+      <input class="form-control" placeholder="닉네임을 입력하세요." id="name" type="text"/>
+      <input class="form-control" placeholder="채팅 내용을 입력하세요." id="message" type="text"/>
+      <button id="submit" type="submit">전송</button>
+    </form>
+  </div>
     
  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -95,46 +97,38 @@
     <script>
         var socket = io();
             
-        var chatView = document.getElementById('chatView');
-        var chatForm = document.getElementById('chatForm');
-     
-        chatForm.addEventListener('submit', function() {
-            var msg = $('#msg');
-     
-            if (msg.val() == '') {
-                return;
-                    
-            } else {
-                socket.emit('SEND', msg.val());
-     
-                var msgLine = $('<div class="msgLine">');
-                var msgBox = $('<div class="msgBox">');
-     
-                msgBox.append(msg.val());
-                msgBox.css('display', 'inline-block');
-     
-                msgLine.css('text-align', 'right');
-                msgLine.append(msgBox);
-     
-                $('#chatView').append(msgLine);
-     
-                msg.val('');
-                chatView.scrollTop = chatView.scrollHeight;
-            }
-        });
-     
-        socket.on('SEND', function(msg) {
-            var msgLine = $('<div class="msgLine">');
-            var msgBox = $('<div class="msgBox">');
-                    
-            msgBox.append(msg);
-            msgBox.css('display', 'inline-block');
-     
-            msgLine.append(msgBox);
-            $('#chatView').append(msgLine);
-     
-            chatView.scrollTop = chatView.scrollHeight;
-        });
+    // 메시지 전송
+    $('#chat').on('submit', function(e){
+          socket.emit('send message', $('#name').val(), $('#message').val());
+          $('#message').val('');
+          e.preventDefault();
+      });
+      
+      // 이름 생성
+      socket.on('create name', function(name){
+          $('#name').val(name);
+      });
+      
+      // 이름 변경
+      socket.on('change name', function(oldname, name){
+          $('#chatLog').append('[알림] ' + oldname + '님이 ' + name + '으로 닉네임을 변경하였습니다.\n');
+      });
+      
+      // 메세지 수신
+      socket.on('receive message', function(msg){
+          $('#chatLog').append(msg+'\n');
+          $('#chatLog').scrollTop($('#chatLog')[0].scrollHeight);
+      });
+      
+      // 채팅방 접속
+      socket.on('new connect', function(name){
+          $('#chatLog').append('[알림] ' + name + '님이 채팅창에 입장하였습니다.\n');
+      });
+      
+      // 채팅방 종료
+      socket.on('new disconnect', function(name){
+          $('#chatLog').append('[알림] ' + name + '님이 채팅창을 떠났습니다.\n');
+      });
     </script>
 </body>
 

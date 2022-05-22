@@ -211,24 +211,24 @@
     });
 
     //수정 쿼리
-    document.querySelectorAll('.twit-edit').forEach(function(tag){
-      console.log(tag);
-      tag.addEventListener('click', function(){
-        const twitId = document.querySelector('.twit-id').value;
-      //const input = document.getElementById('twit');
-      //const value = input.value;
-      //input.value = '';
-        axios.post(`/post/${twitId}/edit`,{
-          //name:value
-        })
-          .then((res) => {
-            location.reload();
-          })
-          .catch((err) => {
-            console.error(err);
-          })
-      });
-    });
+    // document.querySelectorAll('.twit-edit').forEach(function(tag){
+    //   console.log(tag);
+    //   tag.addEventListener('click', function(){
+    //     const twitId = document.querySelector('.twit-id').value;
+    //   //const input = document.getElementById('twit');
+    //   //const value = input.value;
+    //   //input.value = '';
+    //     axios.post(`/post/${twitId}/edit`,{
+    //       //name:value
+    //     })
+    //       .then((res) => {
+    //         location.reload();
+    //       })
+    //       .catch((err) => {
+    //         console.error(err);
+    //       })
+    //   });
+    // });
     
     //팔로잉 취소 쿼리
     document.querySelectorAll('.twit-unfollow').forEach(function (tag) {

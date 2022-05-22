@@ -1,34 +1,40 @@
 const express = require('express');
 var app = require('express')();
 var server = require('http').createServer(app);
-// http server를 socket.io server로 upgrade한다
 var io = require('socket.io')(server);
 
 const router = express.Router();
 
-var socketList = [];
-
-// localhost:3000으로 서버에 접속하면 클라이언트로 index.html을 전송한다
+// localhost:3000 접속시 /chat/chat.html 이동 실행
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/chat/chat.html');
 });
 
-io.on('connection', function (socket) {
-  socketList.push(socket);
-  console.log('User Join');
+var count = 1; // 참여자 번호 발급
 
-  socket.on('SEND', function (msg) {
-    console.log(msg);
-    socketList.forEach(function (item, i) {
-      console.log(item.id);
-      if (item != socket) {
-        item.emit('SEND', msg);
-      }
-    });
+io.on('connect', function (socket) {
+  console.log('user connected: ', socket.id);
+  var name = '익명' + count++;
+  socket.name = name;
+  io.to(socket.id).emit('create name', name);
+  io.emit('new connect', name);
+
+  // 채팅방에서 나갔을 때
+  socket.on('disconnect', function () {
+    console.log('user disconnected: ' + socket.id + ' ' + socket.name);
+    io.emit('new disconnect', socket.name);
   });
 
-  socket.on('disconnect', function () {
-    socketList.splice(socketList.indexOf(socket), 1);
+  // 채팅을 보냈을 때
+  socket.on('send message', function (name, text) {
+    var msg = name + ' : ' + text;
+    // 닉네임 변경 시
+    if (socket.name != name) {
+      io.emit('change name', socket.name, name);
+      socket.name = name; // name 업데이트
+    }
+    console.log(msg);
+    io.emit('receive message', msg);
   });
 });
 
