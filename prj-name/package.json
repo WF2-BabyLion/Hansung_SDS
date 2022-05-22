@@ -4,7 +4,7 @@
   "description": "Hansung_SDS",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app"
+    "start": "node app.js"
   },
   "author": "Hansung_SDS",
   "license": "MIT",
@@ -23,6 +23,7 @@
     "passport": "^0.4.1",
     "passport-kakao": "^1.0.0",
     "passport-local": "^1.0.0",
+    "pdf-thumbnail": "^1.0.6",
     "puppeteer": "^14.1.0",
     "sequelize": "^6.19.0",
     "sequelize-cli": "^6.2.0",
