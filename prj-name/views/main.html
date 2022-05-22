@@ -44,9 +44,8 @@
             <img class="tumbsIcon" src="/img/thumbs_up_icon.png" alt="따봉 아이콘"/>
             {% endif %}
             <div>
-            <div class="twit-content">{{twit.content}}
-              
-            </div>
+            <div class="twit-content">{{twit.content}}</div>
+            
            
           </div>
             {% if twit.img %}
@@ -57,8 +56,7 @@
             <!--유저 체크-->
             {% if twit.User.id == user.id %} 
               <button class="twit-delete btn">삭제</button>
-              <!--<button class="twit-edit btn">게시글 수정</button> -->
-          
+              <a id="content-edit" href="/edit" class="twit-edit-btn">수정</a>
             {% endif %}
             <!-- 삭제 if -->
           </div>
@@ -135,6 +133,9 @@
       }
       })
     })
+    // document.getElementsByClassName("twit-edit-btn").addEventListener('click',function(){
+    //   console.log("click");
+    // })
     document.querySelectorAll('.twit-follow').forEach(function(tag) {
       tag.addEventListener('click', function() {
         const myId = document.querySelector('#my-id');
@@ -170,6 +171,26 @@
       });
     });
 
+    //수정 쿼리
+    document.querySelectorAll('.twit-edit').forEach(function(tag){
+      console.log(tag);
+      tag.addEventListener('click', function(){
+        const twitId = document.querySelector('.twit-id').value;
+      //const input = document.getElementById('twit');
+      //const value = input.value;
+      //input.value = '';
+        axios.post(`/post/${twitId}/edit`,{
+          //name:value
+        })
+          .then((res) => {
+            location.reload();
+          })
+          .catch((err) => {
+            console.error(err);
+          })
+      });
+    });
+    
     //팔로잉 취소 쿼리
     document.querySelectorAll('.twit-unfollow').forEach(function (tag) {
         tag.addEventListener('click', function () {

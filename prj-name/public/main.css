@@ -69,8 +69,8 @@ header{
   background-color: #BACDE9;
 }
 #loginBtn{
-  background-color: skyblue;
-  color:gray;
+  background-color: white;
+  color:crimson;
 }
 /* 문서 생성 버튼 */
 .genereteBtn {
