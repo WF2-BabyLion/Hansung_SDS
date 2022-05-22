@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <div class="timeline">
+    <div class="timeline" >
       {% if user %}
         <div>
           <form id="twit-form" action="/post" method="post" enctype="multipart/form-data">
@@ -20,16 +20,17 @@
           </form>
         </div>
       {% endif %}
-      <div class="twits">
+      <div class="twits" >
         <form id="hashtag-form" action="/hashtag">
           <input type="text" name="hashtag" placeholder="태그 검색">
           <button class="uploadBtn">검색</button>
         </form>
         {% for twit in twits %}
-          <div class="twit">
-            <span class="twitIds">{{twit.id}}</span>
+          <div class="twit" >
+            
             <input type="hidden" value="{{twit.User.id}}" class="twit-user-id">
             <input type="hidden" value="{{twit.id}}" class="twit-id">
+            
             <div class="twit-author">{{twit.User.nick}}</div>
             {% if not followerIdList.includes(twit.User.id) and twit.User.id !== user.id %}
             <button class="twit-follow">팔로우하기</button>
@@ -42,6 +43,7 @@
 
             {% if user%}
             <img class="tumbsIcon" src="/img/thumbs_up_icon.png" alt="따봉 아이콘"/>
+            <div id="changeTextDiv"></div>
             {% endif %}
             <div>
             <div class="twit-content">{{twit.content}}</div>
@@ -56,7 +58,9 @@
             <!--유저 체크-->
             {% if twit.User.id == user.id %} 
               <button class="twit-delete btn">삭제</button>
-              <a id="content-edit" href="/edit" class="twit-edit-btn">수정</a>
+
+              <!-- <a id="content-edit" class="twit-edit-btn">수정</a> -->
+              <button class="twit-edit btn">수정</button>
             {% endif %}
             <!-- 삭제 if -->
           </div>
@@ -84,6 +88,41 @@
             console.error(err);
           });
       });
+    }
+
+    //모든 트윗 기록
+    var twits = document.getElementsByClassName("twit")
+    //누가 클릭했는지 정보
+    var editBtns = document.getElementsByClassName("twit-edit btn")
+    console.log(editBtns[0]);
+    var twitId
+    var idx;
+    for(let i=0;i<editBtns.length;i++){
+      editBtns[i].addEventListener('click',()=>{
+        //트윗 아이디 찾기
+        twitId =editBtns[i].parentNode.querySelector('.twit-id').value
+        //twits의 twit-id와 수정버튼을 누른 twitId가 같다면
+        for(let j =0;j<twits.length;j++){
+          if(twits[j].children[1].value ===  twitId){
+            idx=j
+            //해당 인덱스의 트윗에 textarea와 완료버튼 생성
+            twits[idx].children.changeTextDiv.innerHTML='<textarea id="changeTextArea"></textarea><button id="changeBtn">완료</button>'
+            twits[idx].children.changeTextDiv.children.changeTextArea.value = twits[idx].children[5].innerText;
+            //트윗 내용 가려지게
+            twits[idx].children[5].hidden=true
+            //기존 트윗의 내용이 들어가게 함
+            
+            //완료 버튼을 눌렀을 때 업데이트 해야함.
+            twits[idx].children.changeTextDiv.children.changeBtn.addEventListener('click',()=>{
+                //textarea내용 출력 이 내용을 서버단에서 업데이트 해줘야함
+                var content=twits[idx].children.changeTextDiv.children.changeTextArea
+                console.log(editBtns[i].parentNode.querySelector('.twit-user-id').value)
+                console.log(editBtns[i].parentNode.querySelector('.twit-id').value)
+                console.log(content.value)
+             })
+          }
+        }
+      })
     }
     document.querySelectorAll('.tumbsIcon').forEach(function(btn){
       const myId = document.querySelector('#my-id');
