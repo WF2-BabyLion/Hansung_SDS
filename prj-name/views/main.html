@@ -50,9 +50,12 @@
             
            
           </div>
-            {% if twit.img %}
+            {% if twit.img.charAt(twit.img.length-1) == 'g' %}
               <div class="twit-img"><img src="{{twit.img}}" alt="섬네일"></div>
-              
+            {% elif twit.img.charAt(twit.img.length-1) == 'f' %}   
+               <div>
+                <iframe style="width: 200px; height: 280px;" src="{{twit.img}}"></iframe>
+               </div>
             {% endif %}
             
             <!--유저 체크-->
