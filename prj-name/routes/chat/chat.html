@@ -7,9 +7,7 @@
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
- 
+
     <style>
         #container {
             width: 100%;
@@ -41,9 +39,41 @@
         }
 
         a { text-decoration:none } 
+
+        header{
+  margin-top: 20px;
+  margin-bottom:50px;
+}
+
+/* hr 라인 스타일 */
+.lineStyle {
+  background: #002870;
+  border: 0;
+  height: 3px;
+}
+
+.header{
+  display:flex;
+}
+
+.logo{
+  width: 384px;
+  height: auto;
+  margin-left: 50px;
+}
+
     </style>
 </head>
 <body>
+    <header>
+        <div class="header">
+          <a href="http://localhost:8001/">
+          <img class="logo" style="float:center;" src="https://tigerlcw.github.io/CapStoneImg/hansung/hansungsds_logo.png" href="/" alt="로고"/>
+        </a>
+          <!--<div class="header-name">Hansugn SDS</div> -->
+      </div>
+      <hr class="lineStyle">
+      </header>
     <div style="text-align: left;">
         <a href="javascript:history.back();"style="color: #933838"><h5>뒤로</h5></a>
     </div>
