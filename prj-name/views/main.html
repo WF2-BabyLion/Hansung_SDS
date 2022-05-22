@@ -57,7 +57,7 @@
             <!--유저 체크-->
             {% if twit.User.id == user.id %} 
               <button class="twit-delete btn">삭제</button>
-              <!--<button class="twit-edit btn">게시글 수정</button> -->
+              <a id="content-edit" href="/edit" class="twit-edit btn">수정</a>
           
             {% endif %}
             <!-- 삭제 if -->

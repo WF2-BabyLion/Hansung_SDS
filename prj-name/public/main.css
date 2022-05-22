@@ -239,7 +239,7 @@ footer { text-align: center; }
 
 
 /*삭제 버튼 css*/
-.twit-delete {
+.twit-delete, .twit-edit {
   display: inline-block;
   padding: 10 5px;
   text-decoration: none;
