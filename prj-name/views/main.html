@@ -93,15 +93,17 @@
       });
     }
 
-    //모든 트윗 기록
-    var twits = document.getElementsByClassName("twit")
+     //모든 트윗 기록
+     var twits = document.getElementsByClassName("twit")
     //누가 클릭했는지 정보
     var editBtns = document.getElementsByClassName("twit-edit btn")
-    console.log(editBtns[0]);
+    console.log("editBtns:",editBtns);
     var twitId
     var idx;
     for(let i=0;i<editBtns.length;i++){
+      console.log(editBtns[i]);
       editBtns[i].addEventListener('click',()=>{
+        console.log("come here")
         //트윗 아이디 찾기
         twitId =editBtns[i].parentNode.querySelector('.twit-id').value
         //twits의 twit-id와 수정버튼을 누른 twitId가 같다면
@@ -118,10 +120,21 @@
             //완료 버튼을 눌렀을 때 업데이트 해야함.
             twits[idx].children.changeTextDiv.children.changeBtn.addEventListener('click',()=>{
                 //textarea내용 출력 이 내용을 서버단에서 업데이트 해줘야함
+                //수정 쿼리
                 var content=twits[idx].children.changeTextDiv.children.changeTextArea
-                console.log(editBtns[i].parentNode.querySelector('.twit-user-id').value)
-                console.log(editBtns[i].parentNode.querySelector('.twit-id').value)
-                console.log(content.value)
+                var value = content.value;
+                content.value = '';
+                // console.log(editBtns[i].parentNode.querySelector('.twit-user-id').value)
+                // console.log(editBtns[i].parentNode.querySelector('.twit-id').value)
+                // console.log(content.value)
+                axios.post(`/post/${twitId}/edit`,{
+                  EditContent:value
+                })
+                .then((response)=>{
+                  location.reload();
+                }).catch((err)=>{
+                  console.error(err);
+                });
              })
           }
         }

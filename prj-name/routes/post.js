@@ -49,23 +49,18 @@ router.post('/:id/delete', isLoggedIn, async (req, res, next) => {
 
 //수정
 router.post('/:id/edit', isLoggedIn, async (req, res, next) => {
-  const changeContent = req.body.content;
+  const changeContent = req.body.EditContent;
   try {
-    const postId = req.params.id;
-    await Post.destroy({
-      where: { id: postId },
-    });
-    const user = await User.findOne({ where: { id: req.user.id } });
-    if (user) {
-      Post.update({ twit: changeContent }, { where: { id: req.user.id } });
-      Post.destroy;
-      return res.send('글 수정 완료');
+    const twitId = await Post.findOne({ where: { id: req.params.id } });
+    if (twitId) {
+      Post.update({ content: changeContent }, { where: { id: req.params.id } });
+      return res.send('게시글 수정 완료');
     } else {
       res.status(404).send('유저가 없습니다.');
     }
-  } catch (error) {
-    console.error(error);
-    next(error);
+  } catch (err) {
+    console.error(err);
+    next(err);
   }
 });
 

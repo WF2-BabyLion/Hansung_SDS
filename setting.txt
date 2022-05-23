@@ -10,3 +10,10 @@
 prj-name 이동
 npm install
 npm start
+
+mac에서 작업했기 때문에 패키지의 충돌이 있을 수 있습니다. 
+rm -rf node_nodules
+npm install
+을 해야합니다.
+
+workbench password 1234
